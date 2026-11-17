@@ -1,0 +1,33 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getPosts, tagSlug } from '../../lib/posts';
+
+const posts = await getPosts();
+const counts = new Map<string, { name: string; count: number }>();
+for (const post of posts) {
+  for (const tag of post.data.tags) {
+    const slug = tagSlug(tag);
+    const entry = counts.get(slug) ?? { name: tag, count: 0 };
+    entry.count += 1;
+    counts.set(slug, entry);
+  }
+}
+const tags = [...counts.entries()].sort((a, b) => a[1].name.localeCompare(b[1].name));
+---
+
+<Base title="Topics" description="Browse posts by topic.">
+  <h1>Topics</h1>
+  {
+    tags.length > 0 ? (
+      <ul class="tag-index">
+        {tags.map(([slug, { name, count }]) => (
+          <li>
+            <a class="tag" href={`/tags/${slug}/`}>{name}</a> <span class="count">{count}</span>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="empty">No topics yet.</p>
+    )
+  }
+</Base>
