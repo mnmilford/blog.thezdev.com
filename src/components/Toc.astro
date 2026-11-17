@@ -1,0 +1,76 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+const items = Astro.props.headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+{
+  items.length >= 3 && (
+    <nav class="toc" aria-label="On this page">
+      <details class="toc-box" open>
+        <summary>On this page</summary>
+        <ol>
+          {items.map((h) => (
+            <li class={`toc-d${h.depth}`}>
+              <a href={`#${h.slug}`} data-toc-link={h.slug}>{h.text}</a>
+            </li>
+          ))}
+        </ol>
+      </details>
+    </nav>
+  )
+}
+
+<script>
+  const nav = document.querySelector<HTMLElement>('.toc');
+  if (nav) {
+    const box = nav.querySelector('details');
+    // Sidebar on wide screens stays open; on phones it starts collapsed.
+    const wide = window.matchMedia('(min-width: 75rem)');
+    const sync = () => {
+      if (box) box.open = wide.matches;
+    };
+    sync();
+    wide.addEventListener('change', sync);
+
+    // Close the collapsed menu after a jump on small screens.
+    nav.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a') && !wide.matches && box) box.open = false;
+    });
+
+    // Highlight the section being read.
+    const links = new Map<string, HTMLElement>();
+    nav.querySelectorAll<HTMLElement>('[data-toc-link]').forEach((a) => links.set(a.dataset.tocLink!, a));
+    const headings = [...links.keys()]
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+    const setActive = () => {
+      let current = headings[0];
+      for (const h of headings) {
+        if (h.getBoundingClientRect().top <= 120) current = h;
+        else break;
+      }
+      links.forEach((a, id) => {
+        if (current && id === current.id) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      });
+    };
+    let queued = false;
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(() => {
+          queued = false;
+          setActive();
+        });
+      },
+      { passive: true },
+    );
+    setActive();
+  }
+</script>

@@ -227,8 +227,130 @@ h1 {
   vertical-align: middle;
 }
 
+/* Post layout with contents sidebar */
+main.wrap.wide {
+  max-width: none;
+}
+.post-layout {
+  max-width: var(--measure);
+  margin: 0 auto;
+}
+.post {
+  min-width: 0;
+}
+
+.toc {
+  margin-bottom: 2rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+}
+.toc summary {
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.6rem 0.9rem;
+}
+.toc-box {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.toc ol {
+  list-style: none;
+  margin: 0;
+  padding: 0 0.9rem 0.75rem;
+}
+.toc li {
+  margin: 0;
+}
+.toc a {
+  display: block;
+  padding: 0.25rem 0 0.25rem 0.75rem;
+  border-left: 2px solid transparent;
+  color: var(--muted);
+  text-decoration: none;
+  line-height: 1.35;
+}
+.toc .toc-d3 a {
+  padding-left: 1.6rem;
+  font-size: 0.85rem;
+}
+.toc a:hover {
+  color: var(--accent);
+}
+.toc a[aria-current='true'] {
+  color: var(--text);
+  border-left-color: var(--accent);
+  font-weight: 600;
+}
+
+@media (min-width: 75rem) {
+  /* Article stays centered under the header; contents sit in the left gutter. */
+  .post-layout {
+    max-width: none;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, var(--measure)) minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    column-gap: 3rem;
+    align-items: start;
+  }
+  .post-head {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .post-body {
+    grid-column: 2;
+    grid-row: 2;
+    min-width: 0;
+  }
+  .toc {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    justify-self: end;
+    width: 100%;
+    max-width: 15rem;
+    position: sticky;
+    top: 2rem;
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+    margin-bottom: 0;
+  }
+  .toc-box {
+    border: 0;
+    background: none;
+  }
+  .toc summary {
+    list-style: none;
+    pointer-events: none;
+    padding-left: 0;
+  }
+  .toc summary::-webkit-details-marker {
+    display: none;
+  }
+  .toc ol {
+    padding: 0;
+    border-left: 1px solid var(--border);
+  }
+  .toc a {
+    margin-left: -1px;
+  }
+}
+
+.prose h2,
+.prose h3 {
+  scroll-margin-top: 1.5rem;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 /* Post */
-.post header {
+.post-head {
   margin-bottom: 2rem;
 }
 
@@ -240,6 +362,9 @@ h1 {
 }
 .prose > * + * {
   margin-top: 1.1em;
+}
+.prose > :first-child {
+  margin-top: 0;
 }
 .prose p,
 .prose ul,

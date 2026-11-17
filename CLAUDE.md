@@ -18,6 +18,7 @@ This is not the main business site. thezdev.com will be its own site later; don'
 - `draft: true` keeps a post off the live site. Note the repo is public, so drafts are readable on GitHub.
 - `src/content/posts/example-post.md` shows every formatting option. It stays a draft.
 - Images go in `public/images/` and are referenced as `/images/name.png`. Always write alt text.
+- Posts with three or more `##`/`###` headings get an "On this page" contents list automatically (`src/components/Toc.astro`): a sticky left sidebar on wide screens, a collapsed box under the title on smaller ones. Headings are the navigation, so keep them short.
 
 ## Voice
 
