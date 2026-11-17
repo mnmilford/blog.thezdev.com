@@ -2,7 +2,7 @@
 title: Example post (draft, never published)
 description: A sample showing every formatting option. It only appears in local preview because draft is true.
 date: 2026-11-17
-tags: [Zoho CRM, Getting started]
+tags: [Zoho, Zoho CRM]
 draft: true
 ---
 

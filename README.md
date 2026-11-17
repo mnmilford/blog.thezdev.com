@@ -1,6 +1,6 @@
 # blog.thezdev.com
 
-The Z Dev blog: practical notes on Zoho for small businesses and nonprofits.
+Michael Milford's blog at The Z Dev: Zoho, personal projects, and other writing.
 
 Built with [Astro](https://astro.build) and published to GitHub Pages at https://blog.thezdev.com on every push to `main`.
 
