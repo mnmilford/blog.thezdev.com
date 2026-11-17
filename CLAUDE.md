@@ -10,7 +10,11 @@ This is not the main business site. thezdev.com will be its own site later; don'
 
 - One Markdown file per post in `src/content/posts/`. The file name is the URL: `zoho-one-vs-crm-plus.md` publishes at `/posts/zoho-one-vs-crm-plus/`. Use short lowercase slugs and don't rename a file once it's published (that breaks links).
 - Frontmatter: `title`, `description` (one or two sentences; used on the home page, in search results, and in link previews), `date` (YYYY-MM-DD), optional `updated`, `tags`, `draft`.
-- Tags are how posts are grouped (each tag gets a page under `/tags/`). Give every post one broad tag for its kind, such as `Zoho` or `Projects`, plus a few specific ones. Reuse existing tags before inventing new ones; check `/tags/` or grep the posts.
+- Tags are how posts are grouped (each tag gets a page under `/tags/`). Every post gets exactly one of the three broad tags, spelled exactly like this:
+  - `Zoho`: Zoho how-tos, implementation lessons, product opinions.
+  - `Projects`: things Michael builds.
+  - `Notes`: everything else.
+  Add a few specific tags after it (e.g. `Zoho CRM`, `Deluge`). Reuse existing tags before inventing new ones; check `/tags/` or grep the posts.
 - `draft: true` keeps a post off the live site. Note the repo is public, so drafts are readable on GitHub.
 - `src/content/posts/example-post.md` shows every formatting option. It stays a draft.
 - Images go in `public/images/` and are referenced as `/images/name.png`. Always write alt text.
