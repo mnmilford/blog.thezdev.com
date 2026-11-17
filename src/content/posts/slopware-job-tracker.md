@@ -3,7 +3,7 @@ title: Your Daily Dose of AI Slopware
 description: I built a job tracker instead of applying to jobs.
 date: 2026-11-17
 tags: [Projects, Job tracker, Claude Code]
-draft: true
+draft: false
 ---
 
 ## Drafting
@@ -55,7 +55,7 @@ A strip of stage counts. Under it, every live application grouped by stage, clos
 
 <figure class="shot">
   <a href="/images/slopware-job-tracker/main-view.webp"><img src="/images/slopware-job-tracker/main-view.webp" alt="Main view with the Today column" width="1600" height="1000" loading="lazy" /></a>
-  <figcaption>The main view. Kombucha Analytics has been waiting three days for my availability. Kombucha is patient. It's fermented.</figcaption>
+  <figcaption>The main view. Vaporware Ventures said they'd circle back. They have not circled.</figcaption>
 </figure>
 
 ### The overnight report
