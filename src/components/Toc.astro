@@ -48,7 +48,7 @@ const items = Astro.props.headings.filter((h) => h.depth === 2 || h.depth === 3)
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null);
     const setActive = () => {
-      let current = headings[0];
+      let current: HTMLElement | undefined;
       for (const h of headings) {
         if (h.getBoundingClientRect().top <= 120) current = h;
         else break;

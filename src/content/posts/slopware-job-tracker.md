@@ -6,8 +6,6 @@ tags: [Projects, Job tracker, Claude Code]
 draft: false
 ---
 
-## Drafting
-
 I am looking for a job. This is the part of the story where a sensible person applies to more of them.
 
 I built a tracker. Then I rebuilt it. About 22 hours passed between the first line of code and the redesign going live,¹ and every one of those hours could have gone to job applications. Some of them probably should have.
