@@ -2,10 +2,13 @@
 import Base from '../../layouts/Base.astro';
 import PostList from '../../components/PostList.astro';
 import { getPosts, tagSlug, type Post } from '../../lib/posts';
+import { SECTIONS } from '../../site';
 
 export async function getStaticPaths() {
   const posts = await getPosts();
-  const byTag = new Map<string, { name: string; posts: Post[] }>();
+  const byTag = new Map<string, { name: string; posts: Post[] }>(
+    SECTIONS.map((name) => [tagSlug(name), { name, posts: [] as Post[] }]),
+  );
   for (const post of posts) {
     for (const tag of post.data.tags) {
       const slug = tagSlug(tag);
@@ -29,6 +32,6 @@ const { name, posts } = Astro.props;
 
 <Base title={name} description={`Posts about ${name}.`}>
   <h1>{name}</h1>
-  <PostList posts={posts} />
+  {posts.length > 0 ? <PostList posts={posts} /> : <p class="empty">Nothing here yet.</p>}
   <p class="back"><a href="/tags/">&larr; All topics</a></p>
 </Base>

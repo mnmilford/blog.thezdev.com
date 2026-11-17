@@ -174,6 +174,4 @@ Fine, one. Storing a list of jobs is solved. A spreadsheet does it. The reason I
 
 This is also where I'd promise to keep it up to date. The code is at [github.com/mnmilford/job-tracker](https://github.com/mnmilford/job-tracker). Take it. Change it. Don't tell me. If you want your own copy, the README walks you through it, from a two-minute demo on your laptop to a real install on your own server.
 
-## Stage not recorded
-
-tbc
+To be continued.

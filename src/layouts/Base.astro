@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
-import { SITE } from '../site';
+import { SITE, SECTIONS } from '../site';
+import { tagSlug } from '../lib/posts';
 
 interface Props {
   title?: string;
@@ -9,9 +10,17 @@ interface Props {
   published?: Date;
   /** Let the page lay out its own columns (post pages with a contents sidebar). */
   wide?: boolean;
+  /** Section to mark as current in the header (a post's broad tag). */
+  section?: string;
 }
 
-const { title, description = SITE.description, type = 'website', published, wide = false } = Astro.props;
+const { title, description = SITE.description, type = 'website', published, wide = false, section } = Astro.props;
+const path = Astro.url.pathname.replace(/\/?$/, '/');
+const nav = SECTIONS.map((name) => {
+  const href = `/tags/${tagSlug(name)}/`;
+  const here = path === href;
+  return { name, href, current: here ? 'page' : section === name ? 'true' : undefined };
+});
 const pageTitle = title ? `${title} | ${SITE.title}` : SITE.title;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -46,9 +55,10 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
           <span class="brand-name">{SITE.name}</span>
           <span class="brand-sub">Blog</span>
         </a>
-        <nav aria-label="Site">
-          <a href="/tags/">Topics</a>
-          <a href="/rss.xml">RSS</a>
+        <nav aria-label="Sections">
+          {nav.map((item) => (
+            <a href={item.href} aria-current={item.current}>{item.name}</a>
+          ))}
         </nav>
       </div>
     </header>
@@ -58,6 +68,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <footer class="site-footer">
       <div class="wrap">
         <p>&copy; {new Date().getFullYear()} {SITE.name}. Written by {SITE.author}.</p>
+        <p class="footer-links"><a href="/tags/">All topics</a> · <a href="/rss.xml">RSS</a></p>
       </div>
     </footer>
   </body>

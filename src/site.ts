@@ -5,3 +5,6 @@ export const SITE = {
     "I write about Zoho, the projects I'm building, and whatever else I'm thinking about.",
   author: 'Michael Milford',
 };
+
+/** The three broad tags. Each gets a header link and always has a page. */
+export const SECTIONS = ['Zoho', 'Projects', 'Notes'] as const;
